@@ -1,0 +1,20 @@
+[project]
+name = "clef-vllm"
+version = "0.1.0"
+description = "vLLM plugin + Jev/SystemOne API server for Clef decision models"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+dependencies = ["vllm>=0.28,<0.29", "fastapi", "uvicorn"]
+
+[project.scripts]
+clef-systemone = "clef_vllm.server:main"
+
+[project.entry-points."vllm.general_plugins"]
+clef = "clef_vllm:register"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["clef_vllm"]

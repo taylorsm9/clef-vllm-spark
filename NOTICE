@@ -1,0 +1,19 @@
+clef-vllm-spark
+Copyright 2026 the clef-vllm-spark contributors
+
+This repository contains third-party code under the Apache License 2.0:
+
+vllm_plugin/  -- the "clef-vllm" vLLM plugin, from https://huggingface.co/kurcontko/clef-NVFP4
+                 (directory vllm_plugin/, as published on 2026-10-06). Its license file is kept as
+                 vllm_plugin/LICENSE.
+  Modification (the only change from the published plugin):
+  - clef_vllm/server.py: encode_record calls are serialized with a lock (requests are encoded in
+    worker threads, and fast tokenizers can raise "Already borrowed" under concurrent use).
+
+The plugin loads Cloudflare's joint_schema_model.py and joint head from the Clef release at runtime.
+Clef (https://huggingface.co/Cloudflare/clef) is Apache-2.0, by Cloudflare, Inc., post-trained from
+Qwen/Qwen3.8-27B (Apache-2.0). No model weights are included in this repository.
+
+Evaluation data is not redistributed: eval/ downloads BANKING77 at test time. BANKING77 is by PolyAI,
+CC-BY-4.0: Casanueva et al., "Efficient Intent Detection with Dual Sentence Encoders", NLP4ConvAI 2020.
+eval/results/ contains model outputs (probabilities) only.
